@@ -17,14 +17,6 @@ class User {
     this.money = money;
   }
 
-  public getFirstname(): UserFirstname {
-    return this.firstname;
-  }
-
-  public getLastname(): UserLastname {
-    return this.lastname;
-  }
-
   public setFirstname(firstname: UserFirstname): void {
     this.firstname = firstname;
   }

@@ -2,10 +2,8 @@ import React from 'react';
 
 import User from './domain/User';
 import HomeViewModel from './domain/HomeViewModel';
-import Loading from './domain/Loading';
 
 interface HomeViewProps {
-  loading: Loading;
   user: User | undefined;
   homeViewModel: HomeViewModel;
 }
