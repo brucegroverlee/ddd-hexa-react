@@ -1,32 +1,45 @@
 import React from 'react';
 
 import User from './domain/User';
+import HomeViewModel from './domain/HomeViewModel';
+import Loading from './domain/Loading';
 
 interface HomeViewProps {
+  loading: Loading;
   user: User | undefined;
-  setUser: React.Dispatch<React.SetStateAction<User | undefined>>;
+  homeViewModel: HomeViewModel;
 }
 
 function HomeView(props: HomeViewProps) {
-  const { user, setUser } = props;
+  const { homeViewModel } = props;
+
+  if (homeViewModel.isNotReady()) {
+    return <div>Loading</div>;
+  }
+
+  const user = props.user!;
+
   return (
     <div className="home-view">
       <header>Home</header>
       <main>
-        <section>Fullname: {user?.getFullname()}</section>
-        <section>Firstname: {user?.firstname}</section>
-        <section>Lastname: {user?.lastname}</section>
-        <section>
-          <button onClick={() => setUser(user?.updateRandomLastname())}>
+        <div>Fullname: {user.getFullname()}</div>
+        <div>Firstname: {user.firstname.getValue()}</div>
+        <div>Lastname: {user.lastname.getValue()}</div>
+        <div>
+          <button onClick={() => user.updateRandomLastname()}>
             Refresh the lastname
           </button>
-        </section>
-        <section>Quote: {user?.getQuote()}</section>
-        <section>
-          <button onClick={() => setUser(user?.updateRandomQuote())}>
-            Refresh the quote
+        </div>
+
+        <div>Money: {user.money.getValue()}</div>
+        <div>Money with symbol: {user.money.showWithCurrency()}</div>
+
+        <div>
+          <button onClick={() => homeViewModel.updateUser()}>
+            Change the User
           </button>
-        </section>
+        </div>
       </main>
     </div>
   );

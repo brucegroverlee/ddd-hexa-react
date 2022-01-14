@@ -10,11 +10,13 @@ interface HomeControllerProps {
 
 function HomeController(props: HomeControllerProps) {
   const { sessionService } = props;
-  const { user, setUser } = useUser({
+  const { loading, user, homeViewModel } = useUser({
     sessionService,
   });
 
-  return <HomeView user={user} setUser={setUser} />;
+  return (
+    <HomeView loading={loading} user={user} homeViewModel={homeViewModel} />
+  );
 }
 
 export default HomeController;

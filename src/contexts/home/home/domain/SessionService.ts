@@ -1,7 +1,8 @@
 import User from './User';
 
 interface SessionService {
-  getUser(token: string): Promise<User>;
+  getUser(): Promise<User>;
+  getOtherUser(): Promise<User>;
 }
 
 export default SessionService;

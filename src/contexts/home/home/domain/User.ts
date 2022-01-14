@@ -1,42 +1,54 @@
-class User {
-  public firstname: string;
-  public lastname: string;
-  private quote: string;
+import UserFirstname from './UserFirstname';
+import UserLastname from './UserLastname';
+import UserMoney from './UserMoney';
 
-  constructor(firstname: string, lastname: string, quote: string = '') {
+class User {
+  public firstname: UserFirstname;
+  public lastname: UserLastname;
+  public money: UserMoney;
+
+  constructor(
+    firstname: UserFirstname,
+    lastname: UserLastname,
+    money: UserMoney,
+  ) {
     this.firstname = firstname;
     this.lastname = lastname;
-    this.quote = quote;
+    this.money = money;
   }
 
-  public static create(user: User): User {
-    return new User(user.firstname, user.lastname, user.getQuote());
-  }
-
-  public getFirstname(): string {
+  public getFirstname(): UserFirstname {
     return this.firstname;
   }
 
-  public getLastname(): string {
+  public getLastname(): UserLastname {
     return this.lastname;
   }
 
+  public setFirstname(firstname: UserFirstname): void {
+    this.firstname = firstname;
+  }
+
+  public setLastname(lastname: UserLastname): void {
+    this.lastname = lastname;
+  }
+
+  public updateProperties(
+    firstname: UserFirstname,
+    lastname: UserLastname,
+    money: UserMoney,
+  ): void {
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.money = money;
+  }
+
   public getFullname(): string {
-    return this.firstname + ' ' + this.lastname;
+    return this.firstname.getValue() + ' ' + this.lastname.getValue();
   }
 
-  public getQuote(): string {
-    return this.quote;
-  }
-
-  public updateRandomQuote(): User {
-    this.quote = new Date().toString();
-    return User.create(this);
-  }
-
-  public updateRandomLastname(): User {
-    this.lastname = new Date().toString();
-    return User.create(this);
+  public updateRandomLastname(): void {
+    this.lastname = UserLastname.createRamdon();
   }
 }
 
